@@ -10,6 +10,10 @@ class TreeNode:
     def __iter__(self):
         return iter(self.children)
 
+    def __str__(self):
+        result = str(self.data)
+        return result
+
 
 class Tree:
     def __init__(self, root_data):

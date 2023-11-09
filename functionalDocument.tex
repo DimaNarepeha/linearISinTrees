@@ -37,12 +37,12 @@ $\bm{S} = \bm{C} + \bm{U}$
 \end{enumerate}
 For each node, to calculate $\bm{C}$ and $\bm{U}$ 
 we will need do combinations of its children states correspondingly. Pseudo code in python is as below (Note: to avoid redundant search, we utilized the cache):
+\newpage
 \begin{lstlisting}
 def combinationsWithoutCurrent(current):
     num = 1
     for child in current:
         num *= child.cachedWithoutValue + child.cachedWithValue
-    print("calculated for " + str(current.data))
     return num
 
 
@@ -50,7 +50,6 @@ def combinationsWithCurrent(current):
     num = 1
     for child in current:
         num *= child.cachedWithoutValue
-    print("calculated for " + str(current.data))
     return num
 
 
@@ -86,7 +85,7 @@ Proof, here we only consider the bottom up recursion, using the induction method
 
     Above two cases are exactly what described in the pseudo code.
     The stable set of P is sum of two cases
-  \item Inductive Step: We level up until reach the root. The stable set of the root is the result.
+  \item Inductive Step: We level up until reach the root. The stable set of the root is the result expected.
   \end{itemize}
 
 

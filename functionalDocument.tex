@@ -25,18 +25,17 @@
 
 
 \section*{Problem Description: Counting Independent Sets in a Tree}
-
 In this algorithm project, our primary objective is to develop an efficient algorithm that works in linear time to count independent sets within a tree structure. Independent sets, in the context of graph theory, refer to subsets of vertices in which no two vertices are adjacent. In our case, we focus on trees, which are a special type of graph with no cycles.
 
 \subsection*{Solution Description:}
-We utilized the depth fisrt search method with two different process, both of linear time complexity. 
-For each node, to count the IS in the subtree which roots from that node, we consider three states: 
+We utilized the depth fisrt search method. Traverse the nodes from the leaves to the root(bottom-up).
+For each node,  we consider three states: 
 \begin{enumerate}
-  \item Count the number of ISs without picking the node. we name it combinationWithoutCurrent, denote as $\bm{U}$ \item Count the number of ISs with the node, we name it combinationWithCurrent denote as $\bm{C}$. \item the whole IS count rooting from the node, we name it stableSet, denoted as $\bm{S}$ , which is intuitively calculated as
-$\bm{S} = \bm{C} + \bm{U}$ 
+  \item Count the number of ISs without picking the node. denote as $\bm{U}$, the recursive procedure to do so is combinationsWithoutCurrent,  \item Count the number of ISs with the node, denote as $\bm{C}$, the procedure is combinationWithCurrent . \item the all IS count rooting from the node,  denoted as $\bm{S}$ , which is intuitively calculated as
+$\bm{S} = \bm{C} + \bm{U}$, the procedure is getAllSetsCount. 
 \end{enumerate}
-For each node, to calculate $\bm{C}$ and $\bm{U}$ 
-we will need do combinations of its children states correspondingly. Pseudo code in python is as below (Note: to avoid redundant search, we utilized the cache):
+We will calculate above three states for each node recursively, until we reach the root, the number of all IS count of the root,
+$S_{root}$,  is exactly the output expected. Pseudo code in python is as below: 
 \newpage
 \begin{lstlisting}
 def combinationsWithoutCurrent(current):
@@ -62,11 +61,24 @@ def getAllSetsCount(arrayOfNodes):
     # return root node calculated value [-1] is the last element which is root in this case
     return arrayOfNodes[-1].cachedWithValue + arrayOfNodes[-1].cachedWithoutValue
 \end{lstlisting}
-For the recursion and sum up,
-We can consider two methods: 
-\begin{enumerate}
-      \item Top down from the root \item Bottom up from leaves
-\end{enumerate}
+
+The tree and its node definitions are as below:
+
+\begin{lstlisting}
+class TreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.cachedWithValue = 0
+        self.cachedWithoutValue = 0
+        self.children = []
+
+class Tree:
+    def __init__(self, root_data):
+        self.root = TreeNode(root_data)
+\end{lstlisting}
+
+Tree is nothing but a root tree node where we can end and all IS count of the tree is exactly $S_{root}$.
+
 \subsection*{Proof of correctness and time complexity analysis}
 We traverse the tree node exactly once, with cache, for topdown, we can avoid redundant search. hence, $O(N)$
 

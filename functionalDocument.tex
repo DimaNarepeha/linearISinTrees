@@ -2,6 +2,8 @@
 \usepackage{tikz}
 \usepackage{bm}
 \usepackage{listings}
+\usepackage{amsfonts}
+\usepackage{amsmath}
 
 \lstset{
   language=Python,
@@ -23,19 +25,28 @@
 }
 \begin{document}
 
+\newcommand{\lettercircle}[1]{%
+  \begin{tikzpicture}
+    \node[circle, draw, minimum size=1cm] at (0,0) {#1};
+  \end{tikzpicture}%
+}
+
 
 \section*{Problem Description: Counting Independent Sets in a Tree}
 In this algorithm project, our primary objective is to develop an efficient algorithm that works in linear time to count independent sets within a tree structure. Independent sets, in the context of graph theory, refer to subsets of vertices in which no two vertices are adjacent. In our case, we focus on trees, which are a special type of graph with no cycles.
 
 \subsection*{Solution Description:}
 We utilized the depth fisrt search method. Traverse the nodes from the leaves to the root(bottom-up).
-For each node,  we consider three states: 
+For each node, consider a subtree, whose root is that node, to get the IS of that subtree, denoted as $S$, we divide it two subsets $U$ and $C$: 
 \begin{enumerate}
-  \item Count the number of ISs without picking the node. denote as $\bm{U}$, the recursive procedure to do so is combinationsWithoutCurrent,  \item Count the number of ISs with the node, denote as $\bm{C}$, the procedure is combinationWithCurrent . \item the all IS count rooting from the node,  denoted as $\bm{S}$ , which is intuitively calculated as
-$\bm{S} = \bm{C} + \bm{U}$, the procedure is getAllSetsCount. 
+  \item IS without picking that node. denote as $U$ (unchosen), the count number of it, it's the cardinality of the set, denoted as $|U|$, the recursive procedure to get it is combinationsWithoutCurrent,  
+  \item IS with the node, denote as $C$ (chosen), the count of it is $|C|$, the procedure is combinationWithCurrent . 
+  \item the all IS,  denoted as $S$ , count number of all IS is $|S|$, the procedure is getAllSetsCount.
+  Intuitively, the count number of the IS has formula as below:
+    \[ |S| = |C| + |U| \] 
 \end{enumerate}
 We will calculate above three states for each node recursively, until we reach the root, the number of all IS count of the root,
-$S_{root}$,  is exactly the output expected. Pseudo code in python is as below: 
+$|S_{root}|$, is exactly the output expected. Pseudo code in python is as below: 
 \newpage
 \begin{lstlisting}
 def combinationsWithoutCurrent(current):
@@ -80,18 +91,25 @@ class Tree:
 Tree is nothing but a root tree node where we can end and all IS count of the tree is exactly $S_{root}$.
 
 \subsection*{Proof of correctness and time complexity analysis}
-We traverse the tree node exactly once, with cache, for topdown, we can avoid redundant search. hence, $O(N)$
+We traverse the tree node exactly once, we denote the number of all nodes in the tree as N. So the time complexity of the algorithm with Big O notation is $O(N)$
 
-Proof, here we only consider the bottom up recursion, using the induction method:
+Proof is as in the below, we define some notations: recall three states from the above, we denote sets $U_{L}$, $C_{L}$, $S_{L}$, as each set for the node L, we consider the bottom up recursion, using the induction method:
 \begin{itemize}
-  \item Base case: leaf node $N$, who has no children, according to the algorithm $U=1, C=1, S=2$, which is correct, IS set count is: $\emptyset + N = 2$ 
-  \item Inductive Hypothesis: The parent of the node N, denoted $P$. To calculate IS Count roots from $P$, let's divide into two cases: 
+  \item Base case: Consider the case, a leaf node, denoted as $L$, a leaf is a node who has no children, the IS of $L$ without picking it, is $\emptyset$, $|U_{L}=1|$  the IS of $L$ including it, is the node itself${L}$, $C_{L}=1$, all IS set count is: $|S_{L}| = |U_{L}| + |C_{L}| = 2$ 
+  \item Inductive Hypothesis: Because we traverse from the bottom to the top, let's move one level up, consider the subtree starting from the parent of the node, let's denote the parent node as $P$. To calculate all IS Count of the subtree roots from $P$, let's divide into two cases: 
     \begin{enumerate}
       \item IS without P
       \item IS with P. 
     \end{enumerate}
 
-    In case of 1, the result is combinations of IS of each child. $\prod_S(C)$. We denote $S(C)$ as the stable set of the node C, the below follows this convention.
+    In case of 1, think about each child node, denoted as $D_{1...n}$ meaning Nth child node of the parent node P, from 1 to N, let's consider each Independent set of the substree roots from the child node, 
+    \[ S_{D} =  U_{D} \cup C_{D} \]
+    To get the $S_P$ we consider Cartesion product of each $S_{D_n}$, meaning:
+    \[ S_P = \{ x \in \mathbb{R} \,|\, x^2 = 1 \} \]
+    The number of combinations of choosing $k$ elements from a set of $n$ elements is denoted as $\binom{n}{k}$.
+    the result is combinations of IS of each child. 
+    
+    $\prod_S(C)$. We denote $S(C)$ as the stable set of the node C, the below follows this convention.
 
     In case of 2, the result will be the combinations of IS of each child without the child node inside, $\prod_U(C)$. However when we were calculating the $S(C)$, recall, $S= C + U$, we got and memorized the result of $U$, so this step does not cost any computational complexity. 
 

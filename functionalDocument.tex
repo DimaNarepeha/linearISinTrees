@@ -136,7 +136,11 @@ Proof is as in the below, we define some notations: recall three states from the
 
 
 \subsection*{Input and output}
-Input: a text file, each line represents the tree in a string format, for example: 1 [2 [4, 5], 3 [6, 7]], representing a tree as below:
+Input: a text file, 
+A nested list to represent a tree:
+for example:
+\[ [1 [2 [4, 5], 3 [6, 7]] ] \]
+representing a tree as below:
 
 
 \begin{tikzpicture}
@@ -161,11 +165,37 @@ Input: a text file, each line represents the tree in a string format, for exampl
     };
 \end{tikzpicture}
 
-The expected output is 41, a number represents the count of the independent sets in the tree. 
+where each bracket represents a level in the tree. the nodes in the same level (the same bracket) are siblings.
+the first node in the fisrt level (first bracket), represents the node of the tree.
 
+The expected output of this tree is 41, a number represents the count of the independent sets in the tree. 
+
+
+Another example:
+
+\[ [10 [20 [40, 50], 30 [60 [80, 90], 70]]] \]
+In this representation:
+
+10 is the root.
+20 and 30 are its children.
+40 and 50 are children of 20.
+60 and 70 are children of 30.
+80 and 90 are children of 60.
+This is a simple way to represent a tree structure using nested lists. Each sublist represents a node in the tree, where the first element is the node value, and the subsequent elements (if any) are the children of that node. 
+
+In the input file, there is a nested list in each line, each list represents a tree, such as:
+\[ [1 [2 [4, 5], 3 [6, 7]]]\]
+\[[50 [30 [20, 40], 70 [60, 80]]]\]
+\[[8 [3 [1, 6 [4, 7]], 10 [9, 14]]]\]
+\[[1 [2 [4 [8, 9], 5 [10, 11]], 3 [6 [12, 13], 7 [14, 15]]]]\]
+
+In the output file, each line representing a number, the result of number of IS in each correspondinh tree from the input file:
+\[10\]
+\[14\]
+\[26\]
+\[42\]
 Input file will be input.txt under the current directory while output file will be output.txt.
 
-Each line of the input is a tree, the corresponding line in the output file will be IS count.
 
 
 \end{document}

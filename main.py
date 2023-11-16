@@ -1,7 +1,7 @@
 from TreeNode import Tree, TreeNode
 from TreeSetsDP import getAllSetsCount
 from TreeSetsWithCache import stableSet
-from Utils import setArrayOfNodesFrom, getInputFromFile
+from Utils import getArrayOfNodesFrom, getTreeFromFile
 
 '''
      1
@@ -27,7 +27,7 @@ from Utils import setArrayOfNodesFrom, getInputFromFile
 # 4 5   6 7
 
 #always add line at the end of your file
-tree_from_file = getInputFromFile("inputfile")
+tree_from_file = getTreeFromFile("inputfile")
 
 # my_tree = Tree(1)  # Root node with data 1
 # my_tree.root.children.append(TreeNode(2))
@@ -85,7 +85,7 @@ print(stableSet(tree_from_file.root))
 # child3.children.append(TreeNode(6))
 # child3.children.append(TreeNode(7))
 
-arrayOfNodes = setArrayOfNodesFrom(tree_from_file.root)
+arrayOfNodes = getArrayOfNodesFrom(tree_from_file.root)
 print(arrayOfNodes)
 # reverse array. so that we start from the bottom of a tree
 allsetsCountDP = getAllSetsCount(arrayOfNodes[::-1])

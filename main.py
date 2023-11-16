@@ -1,7 +1,7 @@
 from TreeNode import Tree, TreeNode
 from TreeSetsDP import getAllSetsCount
 from TreeSetsWithCache import stableSet
-from Utils import setArrayOfNodesFrom
+from Utils import setArrayOfNodesFrom, getInputFromFile
 
 '''
      1
@@ -26,18 +26,21 @@ from Utils import setArrayOfNodesFrom
 #  2     3
 # 4 5   6 7
 
-my_tree = Tree(1)  # Root node with data 1
-my_tree.root.children.append(TreeNode(2))
-my_tree.root.children.append(TreeNode(3))
+#always add line at the end of your file
+tree_from_file = getInputFromFile("inputfile")
 
-child2 = my_tree.root.children[0]
-child3 = my_tree.root.children[1]
-
-child2.children.append(TreeNode(4))
-child2.children.append(TreeNode(5))
-
-child3.children.append(TreeNode(6))
-child3.children.append(TreeNode(7))
+# my_tree = Tree(1)  # Root node with data 1
+# my_tree.root.children.append(TreeNode(2))
+# my_tree.root.children.append(TreeNode(3))
+#
+# child2 = my_tree.root.children[0]
+# child3 = my_tree.root.children[1]
+#
+# child2.children.append(TreeNode(4))
+# child2.children.append(TreeNode(5))
+#
+# child3.children.append(TreeNode(6))
+# child3.children.append(TreeNode(7))
 
 # my_tree = Tree(1)  # Root node with data 1
 # my_tree.root.children.append(TreeNode(2))
@@ -47,9 +50,9 @@ child3.children.append(TreeNode(7))
 # node_two.children.append(TreeNode(3))
 # node_two.children.append(TreeNode(4))
 
-print(my_tree)
+print(tree_from_file)
 
-print(stableSet(my_tree.root))
+print(stableSet(tree_from_file.root))
 
 # DP Algorithm:
 # the function should reseive an array of nodes that goes from bottom to the top level by level
@@ -69,20 +72,20 @@ print(stableSet(my_tree.root))
 #  2     3
 # 4 5   6 7
 
-my_tree = Tree(1)  # Root node with data 1
-my_tree.root.children.append(TreeNode(2))
-my_tree.root.children.append(TreeNode(3))
+# my_tree = Tree(1)  # Root node with data 1
+# my_tree.root.children.append(TreeNode(2))
+# my_tree.root.children.append(TreeNode(3))
+#
+# child2 = my_tree.root.children[0]
+# child3 = my_tree.root.children[1]
+#
+# child2.children.append(TreeNode(4))
+# child2.children.append(TreeNode(5))
+#
+# child3.children.append(TreeNode(6))
+# child3.children.append(TreeNode(7))
 
-child2 = my_tree.root.children[0]
-child3 = my_tree.root.children[1]
-
-child2.children.append(TreeNode(4))
-child2.children.append(TreeNode(5))
-
-child3.children.append(TreeNode(6))
-child3.children.append(TreeNode(7))
-
-arrayOfNodes = setArrayOfNodesFrom(my_tree.root)
+arrayOfNodes = setArrayOfNodesFrom(tree_from_file.root)
 print(arrayOfNodes)
 # reverse array. so that we start from the bottom of a tree
 allsetsCountDP = getAllSetsCount(arrayOfNodes[::-1])

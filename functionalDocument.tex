@@ -102,20 +102,36 @@ Proof is as in the below, we define some notations: recall three states from the
       \item IS with P. 
     \end{enumerate}
 
-    In case of 1, think about each child node, denoted as $D_{1...n}$ meaning Nth child node of the parent node P, from 1 to N, let's consider each Independent set of the substree roots from the child node, 
-    \[ S_{D} =  U_{D} \cup C_{D} \]
-    To get the $S_P$ we consider Cartesion product of each $S_{D_n}$, meaning:
-    \[ S_P = \{ x \in \mathbb{R} \,|\, x^2 = 1 \} \]
-    The number of combinations of choosing $k$ elements from a set of $n$ elements is denoted as $\binom{n}{k}$.
-    the result is combinations of IS of each child. 
-    
-    $\prod_S(C)$. We denote $S(C)$ as the stable set of the node C, the below follows this convention.
+    In case of 1, think about each child node, denoted as $D_{1...n}$, meaning Nth child node of the parent node P, from 1st to Nth,
+    let's consider all Independent sets of each substree roots from the child node, 
+    \[ S_{D} =  U_{D} \cup C_{D} \tag{$*$} \] 
+    Because there is no P in the any set of $S_{P}$, recall the definition of independent set, we have no limit in combine all the sets inside each child IS set.
+    We consider Cartesion product of each $S_{D_n}$, we denote $a_{D_n}$ as any element in $S_{D_n}$:
+    \[ U_P =  S_{D_1} \times S_{D_2} \times \ldots \times S_{D_n} = \{(a_{D_1}, a_{D_2}, \ldots, a_{D_n}) \mid a_{D_1} \in S_{D_1}, a_{D_2} \in S_{D_2}, \ldots, a_{D_n} \in S_{D_n}\} \]
+    Here, the each pair does not need be ordered.
 
-    In case of 2, the result will be the combinations of IS of each child without the child node inside, $\prod_U(C)$. However when we were calculating the $S(C)$, recall, $S= C + U$, we got and memorized the result of $U$, so this step does not cost any computational complexity. 
+    The cardinality of the Cartesian product $S_{D_1} \times S_{D_2} \times \ldots \times S_{D_n}$ is the product of the cardinalities of the individual sets:
+    \[|U_P| =|S_{D_1} \times S_{D_2} \times \ldots \times S_{D_n}| = |S_{D_1}| \cdot |S_{D_2}| \cdot \ldots \cdot |S_{D_n}| \]
+
+    In case of 2, due to the fact the parent node is included in each set, similarily, 
+    the result will be the combinations of IS of each child without the child node inside (set of $U$), hence:
+    \[ C_P =  U_{D_1} \times U_{D_2} \times \ldots \times U_{D_n} = \{(a_{D_1}, a_{D_2}, \ldots, a_{D_n}) \mid a_{D_1} \in U_{D_1}, a_{D_2} \in U_{D_2}, \ldots, a_{D_n} \in U_{D_n}\} \]
+    \[|C_P| =|U_{D_1} \times U_{D_2} \times \ldots \times U_{D_n}| = |U_{D_1}| \cdot |U_{D_2}| \cdot \ldots \cdot |U_{D_n}| \]
+
+    recall equation $*$, in the case one, to get $S_{D}$, we already get $U_{D}$ first, due to the cache, we don't need compute it again. 
+
+    hence, the case two does not add extra computaltional complexity.
 
     Above two cases are exactly what described in the pseudo code.
-    The stable set of P is sum of two cases
-  \item Inductive Step: We level up until reach the root. The stable set of the root is the result expected.
+    
+    The final step:
+    \[ S_{P} =  U_{P} \cup C_{P} \] 
+    \[ |S_{P}| =  |U_{P}| + |C_{P}| \] 
+
+
+
+  \item Inductive Step: For each level up, we do the exactly as Inductive Hypothesis, until reach the root. $|S_{root}|$, is exactly the output expected.
+
   \end{itemize}
 
 

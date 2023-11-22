@@ -105,7 +105,7 @@ Tree is nothing but a root tree node where we can end and all IS count of the tr
 We traverse the tree node exactly once, we denote the number of all nodes in the tree as N. So the time complexity of the algorithm with Big O notation is $O(N)$ \newline
 Proof is as in the below, we define some notations: recall three states from the above, we denote sets $U_{L}$, $C_{L}$, $S_{L}$, as each set for the node L, we consider the bottom up recursion, using the induction method:
 \begin{itemize}
-  \item Base case: Consider the case, a leaf node, denoted as $L$, a leaf is a node who has no children, the IS of $L$ without picking it, is $\emptyset$, $|U_{L}=1|$  the IS of $L$ including it, is the node itself${L}$, $C_{L}=1$, all IS set count is: $|S_{L}| = |U_{L}| + |C_{L}| = 2$ 
+  \item Base case: Consider the case, a leaf node, denoted as $L$, a leaf is a node who has no children, the IS of $L$ without picking it, is $\emptyset$, $U_{L} = \{\emptyset\}$ $|U_{L}|=1$, the IS of $L$ including it, is the node itself, $\{L\}$, $|C_{L}|=1$, all IS set count is: $|S_{L}| = |U_{L}| + |C_{L}| = 2$ 
   \item Inductive Hypothesis: Because we traverse from the bottom to the top, let's move one level up, consider the subtree starting from the parent of the node, let's denote the parent node as $P$. To calculate all IS Count of the subtree roots from $P$, let's divide into two cases: 
     \begin{enumerate}
       \item IS without P
@@ -147,7 +147,7 @@ Proof is as in the below, we define some notations: recall three states from the
 
 \subsection*{Input and output}
 Input: a text file, 
-A nested list to represent a tree:
+Some lists to represent a tree:
 for example:
 \[
   \begin{array}{l}
@@ -160,6 +160,7 @@ for example:
 7 \\
 \end{array}
 \]
+
 
 representing a tree as below:
 
@@ -185,7 +186,8 @@ representing a tree as below:
       }
     };
 \end{tikzpicture}
-The first itrem in each line represents the node itself, the subsequent items are its children.
+\newline
+The first item in each line represents the node itself, the subsequent items are its children.
 
 We start from the first line, first node represents the root of the tree, the subsequent items are the children of it.
 
@@ -196,7 +198,7 @@ Then node 3, then jump to next level, the node 4, which is the child of node 2, 
 When a node is a leaf, the line will be the node itself without subsequence.
 
 
-output is a number, count of IS of the whole tree, for the above case is, 41.
+The output file is a number, count of IS of the whole tree, for the above case is, 41.
 
 Input file will be input.txt under the current directory while output file will be output.txt.
 

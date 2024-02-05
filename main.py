@@ -53,7 +53,7 @@ arrayOfNodes = getArrayOfNodesFrom(tree_from_file.root)
 my_code = '''
 allsetsCountDP = getAllSetsCount(arrayOfNodes[::-1])
 '''
-print(timeit.timeit(setup=import_setup, stmt=my_code, number=1000) * 1000000000)
+print(f"{timeit.timeit(setup=import_setup, stmt=my_code, number=1000) * 1000000000} nano seconds")
 # Specify the file path
 file_path = 'output.txt'
 

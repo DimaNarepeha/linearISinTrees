@@ -92,5 +92,5 @@ def writeTreeToFileRecursive(node, file):
 #numberOfLevels = int(input("Please enter number of levels and press enter:\n"))
 #axChildsPerNode = int(input("Please enter max childs per node and press enter:\n"))
 # Example usage:
-#enerateTree(numberOfLevels, maxChildsPerNode, 'input.txt')
-generateTree("input.txt", 1300)
+numberOfNodes = int(input("Please enter number of the nodes:\n"))
+generateTree("input.txt", numberOfNodes)

@@ -2,7 +2,6 @@ def combinationsWithoutCurrent(current):
     num = 1
     for child in current:
         num *= child.cachedWithoutValue + child.cachedWithValue
-    print("calculated for " + str(current.data))
     return num
 
 
@@ -10,7 +9,6 @@ def combinationsWithCurrent(current):
     num = 1
     for child in current:
         num *= child.cachedWithoutValue
-    print("calculated for " + str(current.data))
     return num
 
 

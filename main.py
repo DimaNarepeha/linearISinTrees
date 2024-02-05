@@ -1,7 +1,6 @@
-from TreeNode import Tree, TreeNode
-from TreeSetsDP import getAllSetsCount
-from TreeSetsWithCache import stableSet
+import timeit
 from Utils import getArrayOfNodesFrom, getTreeFromFile
+from TreeSetsDP import getAllSetsCount
 
 '''
      1
@@ -27,32 +26,8 @@ from Utils import getArrayOfNodesFrom, getTreeFromFile
 # 4 5   6 7
 
 #always add line at the end of your file
-tree_from_file = getTreeFromFile("inputfile")
 
-# my_tree = Tree(1)  # Root node with data 1
-# my_tree.root.children.append(TreeNode(2))
-# my_tree.root.children.append(TreeNode(3))
-#
-# child2 = my_tree.root.children[0]
-# child3 = my_tree.root.children[1]
-#
-# child2.children.append(TreeNode(4))
-# child2.children.append(TreeNode(5))
-#
-# child3.children.append(TreeNode(6))
-# child3.children.append(TreeNode(7))
 
-# my_tree = Tree(1)  # Root node with data 1
-# my_tree.root.children.append(TreeNode(2))
-# my_tree.root.children.append(TreeNode(5))
-# node_two = my_tree.root.children[0]
-#
-# node_two.children.append(TreeNode(3))
-# node_two.children.append(TreeNode(4))
-
-print(tree_from_file)
-
-print(stableSet(tree_from_file.root))
 
 # DP Algorithm:
 # the function should reseive an array of nodes that goes from bottom to the top level by level
@@ -67,26 +42,22 @@ print(stableSet(tree_from_file.root))
 # 7,6,5,4,3,2,1
 # the only important property is that child should always be earlier to the parent
 
-
-#     1
-#  2     3
-# 4 5   6 7
-
-# my_tree = Tree(1)  # Root node with data 1
-# my_tree.root.children.append(TreeNode(2))
-# my_tree.root.children.append(TreeNode(3))
-#
-# child2 = my_tree.root.children[0]
-# child3 = my_tree.root.children[1]
-#
-# child2.children.append(TreeNode(4))
-# child2.children.append(TreeNode(5))
-#
-# child3.children.append(TreeNode(6))
-# child3.children.append(TreeNode(7))
-
-arrayOfNodes = getArrayOfNodesFrom(tree_from_file.root)
-print(arrayOfNodes)
 # reverse array. so that we start from the bottom of a tree
+import_setup = '''
+from TreeSetsDP import getAllSetsCount
+from Utils import getArrayOfNodesFrom, getTreeFromFile
+tree_from_file = getTreeFromFile("input.txt")
+arrayOfNodes = getArrayOfNodesFrom(tree_from_file.root)
+'''
+
+my_code = '''
 allsetsCountDP = getAllSetsCount(arrayOfNodes[::-1])
-print(allsetsCountDP)
+'''
+print(timeit.timeit(setup=import_setup, stmt=my_code, number=1000) * 1000000000)
+# Specify the file path
+file_path = 'output.txt'
+
+# Open the file in write mode
+#with open(file_path, 'w') as file:
+#    # Write the number to the file
+#    file.write(str(allsetsCountDP))

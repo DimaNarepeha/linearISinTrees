@@ -1,6 +1,5 @@
 from TreeNode import Tree, TreeNode
 
-
 def getArrayOfNodesFrom(node):
     result_arr = []
     if not node:

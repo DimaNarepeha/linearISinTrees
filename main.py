@@ -42,22 +42,50 @@ from TreeSetsDP import getAllSetsCount
 # 7,6,5,4,3,2,1
 # the only important property is that child should always be earlier to the parent
 
-# reverse array. so that we start from the bottom of a tree
-import_setup = '''
+def write_to_file(data, filename="output.txt"):
+    with open(filename, 'w') as file:
+        file.write(data)
+    print(f"Result written to {filename}")
+
+def test_function():
+    # Replace this with the actual test function logic
+    import_setup = '''
 from TreeSetsDP import getAllSetsCount
 from Utils import getArrayOfNodesFrom, getTreeFromFile
 tree_from_file = getTreeFromFile("input.txt")
 arrayOfNodes = getArrayOfNodesFrom(tree_from_file.root)
-'''
+    '''
 
-my_code = '''
+    my_code = '''
 allsetsCountDP = getAllSetsCount(arrayOfNodes[::-1])
-'''
-print(f"{timeit.timeit(setup=import_setup, stmt=my_code, number=1000) * 1000000000} nano seconds")
-# Specify the file path
-file_path = 'output.txt'
+    '''
+    print(f"{timeit.timeit(setup=import_setup, stmt=my_code, number=1000) * 1000000000} nano seconds")
 
-# Open the file in write mode
-#with open(file_path, 'w') as file:
-#    # Write the number to the file
-#    file.write(str(allsetsCountDP))
+def real_function():
+    # Replace this with the actual real function logic
+    tree_from_file = getTreeFromFile("input.txt")
+    arrayOfNodes = getArrayOfNodesFrom(tree_from_file.root)
+    # reverse array. so that we start from the bottom of a tree
+    allsetsCountDP = getAllSetsCount(arrayOfNodes[::-1])
+    print(f"the IS count is {allsetsCountDP}")
+    write_to_file(str(allsetsCountDP))
+
+def main():
+    # Asking user for the mode
+    mode = input("Which mode do you want to run? (1 for Test Mode, 2 for Output Mode): ")
+
+    if mode == "1":
+        # Test Mode
+        print("Test Mode Selected.")
+        test_function()
+
+    elif mode == "2":
+        # Output Mode
+        print("Output Mode Selected.")
+        real_function()
+    else:
+        print("Invalid mode selected. Please choose 1 for Test Mode or 2 for Output Mode.")
+
+if __name__ == "__main__":
+    main()
+
